@@ -4,7 +4,6 @@ import Task from '../Task/Task';
 
 const StateCol = props => {
     const { title, FSMtasks, updateTask } = props;
-    console.log('StateCol rendered');
     return (
         <div>
             <div>{title}</div>
@@ -13,7 +12,7 @@ const StateCol = props => {
                     {FSMtasks.map(FSMtask => {
                         return (
                             <Task
-                                key={FSMtask.task.key}
+                                key={FSMtask.task.id}
                                 updateTask={updateTask}
                                 task={FSMtask}
                             />

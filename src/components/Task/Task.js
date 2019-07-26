@@ -16,8 +16,6 @@ const Task = props => {
             })
         );
     };
-    console.log('Task rendered');
-
     return (
         <div>
             <div>
@@ -37,6 +35,7 @@ const Task = props => {
                     )}
                 </select>
                 <div className="task">
+                    <div>{task.task.id}</div>
                     <div>{task.task.name}</div>
                     <div>{task.task.currentState}</div>
                 </div>

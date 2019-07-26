@@ -16,7 +16,7 @@ class StateMachine {
                         );
                     });
                 }
-                this._addState(state, item.initial || false);
+                this._addState(state);
             });
         }
     }
@@ -24,7 +24,7 @@ class StateMachine {
     start() {
         if (!this._initialState) {
             console.error(
-                'State Machine cannot start. No initialState states defined.'
+                'State Machine cannot start. initial State is not defined.'
             );
         }
         this._transitionTo(this._initialState, null);

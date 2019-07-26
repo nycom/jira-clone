@@ -1,10 +1,10 @@
 import React from 'react';
-
-// import axios from 'axios';
 import PropTypes from 'prop-types';
-import StateCol from '../StateCol/StateCol';
 import { connect } from 'react-redux';
+
 import StateMachine from '../../FiniteStateMachine/FiniteStateMachine';
+import StateCol from '../StateCol/StateCol';
+import { fetchInitialData } from '../../store/actions';
 
 const createFSMTasks = (tasks, jiraConfig) => {
     return tasks.map(task => {
@@ -18,10 +18,10 @@ const createFSMTasks = (tasks, jiraConfig) => {
     });
 };
 
-const mapStateToProps = ({ main, tasks }, ownProps) => {
-    const { jiraConfig } = main;
+const mapStateToProps = ({ config, tasks }, ownProps) => {
+    const { jiraConfig, loading } = config;
     const updatedTasks = createFSMTasks(tasks, jiraConfig);
-    return { ...main, updatedTasks };
+    return { ...config, loading, updatedTasks };
 };
 
 class Sprint extends React.Component {
@@ -29,22 +29,16 @@ class Sprint extends React.Component {
         return tasks.filter(task => task.sm.currentState.name === state);
     };
 
+    componentDidMount() {
+        this.props.dispatch(fetchInitialData());
+    }
+
     render() {
-        const { updatedTasks, states } = this.props;
+        const { updatedTasks, states = [], loading = false } = this.props;
         const statesArray = Object.values(states);
-        const filtered = {
-            ...statesArray.map(state => {
-                return {
-                    [state]: updatedTasks.filter(
-                        task => task.sm.currentState.name === state
-                    )
-                };
-            })
-        };
-        statesArray.map(state => console.log(filtered[state]));
-        console.log(filtered);
-        console.log('Sprint rendered');
-        return (
+        return loading ? (
+            <h1>Loading Jira Configuration</h1>
+        ) : (
             <div className="sprint-container">
                 {statesArray.map(state => {
                     return (
@@ -62,6 +56,7 @@ class Sprint extends React.Component {
 
 Sprint.propTypes = {
     dispatch: PropTypes.func,
+    loading: PropTypes.bool,
     handleClick: PropTypes.func,
     jiraConfig: PropTypes.array,
     updatedTasks: PropTypes.array,

@@ -1,100 +1,30 @@
 import { combineReducers } from 'redux';
-import { UPDATE_TASK } from './constants';
+import {
+    REQUEST_INITIAL_DATA,
+    LOAD_INITIAL_DATA,
+    LOAD_TASKS,
+    UPDATE_TASK
+} from './constants';
 
-const states = {
-    Todo: 'Todo',
-    InDevelopment: 'InDevelopment',
-    QA: 'QA',
-    Done: 'Done'
-};
-const actions = {
-    Start: 'Start',
-    Cancel: 'Cancel',
-    Finish: 'Finish',
-    Reject: 'Reject',
-    Accept: 'Accept',
-    Redo: 'Redo'
-};
-const tasksInitialState = [
-    {
-        key: 't1',
-        name: 'Task 1',
-        currentState: 'Todo'
-    },
-    {
-        key: 't2',
-        name: 'Task 2',
-        currentState: 'InDevelopment'
-    },
-    {
-        key: 't3',
-        name: 'Task 3',
-        currentState: 'Todo'
-    }
-];
+const initialConfig = { loading: false };
 
-const initialConfig = {
-    states: {
-        Todo: 'Todo',
-        InDevelopment: 'InDevelopment',
-        QA: 'QA',
-        Done: 'Done'
-    },
-    actions: {
-        Start: 'Start',
-        Cancel: 'Cancel',
-        Finish: 'Finish',
-        Reject: 'Reject',
-        Accept: 'Accept',
-        Redo: 'Redo'
-    },
-    jiraConfig: [
-        {
-            name: states.Todo,
-            transitions: [
-                {
-                    action: actions.Start,
-                    target: states.InDevelopment
-                }
-            ]
-        },
-        {
-            name: states.InDevelopment,
-            transitions: [
-                { action: actions.Finish, target: states.QA },
-                { action: actions.Cancel, target: states.Todo }
-            ]
-        },
-        {
-            name: states.QA,
-            transitions: [
-                {
-                    action: actions.Reject,
-                    target: states.InDevelopment
-                },
-                { action: actions.Accept, target: states.Done }
-            ]
-        },
-        {
-            name: states.Done,
-            transitions: [{ action: actions.Redo, target: states.Todo }]
-        }
-    ]
-};
-
-function main(state = initialConfig, action) {
+function config(state = initialConfig, action) {
     switch (action.type) {
-        case 'CONFIG_LOADED':
-            return action.payload;
+        case REQUEST_INITIAL_DATA:
+            return { ...state, loading: true };
+        case LOAD_INITIAL_DATA:
+            return { ...state, ...action.payload, loading: false };
         default:
             return state;
     }
 }
-function tasks(state = tasksInitialState, action) {
+function tasks(state = [], action) {
     switch (action.type) {
+        case LOAD_TASKS:
+            return [...action.payload];
         case UPDATE_TASK:
             return state.map(task => {
-                if (task.key === action.payload.key) {
+                if (task.id === action.payload.id) {
                     return { ...action.payload };
                 }
                 return task;
@@ -104,6 +34,6 @@ function tasks(state = tasksInitialState, action) {
     }
 }
 export default combineReducers({
-    main,
+    config,
     tasks
 });
