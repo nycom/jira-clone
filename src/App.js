@@ -6,9 +6,8 @@ import Sprint from './components/Sprint/Sprint';
 const App = () => {
     return (
         <div className="full-screen">
-            <div>
-                <Sprint />
-            </div>
+            <h1>Finite State Machine - Jira Clone</h1>
+            <Sprint />
         </div>
     );
 };

@@ -3,7 +3,9 @@ import {
     REQUEST_INITIAL_DATA,
     LOAD_INITIAL_DATA,
     LOAD_TASKS,
-    UPDATE_TASK
+    UPDATE_TASK,
+    SELECT_TASK,
+    CLEAR_TASK
 } from './constants';
 
 const initialConfig = { loading: false };
@@ -33,7 +35,19 @@ function tasks(state = [], action) {
             return state;
     }
 }
+
+function selectedTask(state = {}, action) {
+    switch (action.type) {
+        case SELECT_TASK:
+            return { ...action.payload };
+        case CLEAR_TASK:
+            return {};
+        default:
+            return state;
+    }
+}
 export default combineReducers({
     config,
-    tasks
+    tasks,
+    selectedTask
 });

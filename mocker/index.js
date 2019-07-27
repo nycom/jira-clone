@@ -13,4 +13,4 @@ const proxy = {
         });
     }
 };
-module.exports = delay(proxy, 2000);
+module.exports = delay(proxy, 100);

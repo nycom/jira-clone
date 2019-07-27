@@ -1,24 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './StateCol.scss';
 import Task from '../Task/Task';
 
 const StateCol = props => {
-    const { title, FSMtasks, updateTask } = props;
+    const { title, FSMtasks, handleTaskStateChange, active } = props;
+    const handleDrop = e => {
+        handleTaskStateChange(title);
+    };
+    const allowDrop = ev => {
+        ev.preventDefault();
+    };
     return (
-        <div>
+        <div className="state-col-container">
             <div>{title}</div>
-            <div className="state-col-container">
-                <div className="tasks-container">
-                    {FSMtasks.map(FSMtask => {
-                        return (
-                            <Task
-                                key={FSMtask.task.id}
-                                updateTask={updateTask}
-                                task={FSMtask}
-                            />
-                        );
-                    })}
-                </div>
+            <div
+                onDragOver={allowDrop}
+                onDrop={handleDrop}
+                className={'tasks-container ' + (active ? 'active-col' : '')}>
+                {FSMtasks.map(FSMtask => {
+                    return <Task key={FSMtask.baseTask.id} task={FSMtask} />;
+                })}
             </div>
         </div>
     );
@@ -26,8 +28,9 @@ const StateCol = props => {
 
 StateCol.propTypes = {
     title: PropTypes.string,
+    active: PropTypes.bool,
     FSMtasks: PropTypes.array,
-    updateTask: PropTypes.func,
+    handleTaskStateChange: PropTypes.func,
     children: PropTypes.node
 };
 

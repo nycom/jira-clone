@@ -4,11 +4,21 @@ import {
     REQUEST_INITIAL_DATA,
     LOAD_INITIAL_DATA,
     UPDATE_TASK,
-    LOAD_TASKS
+    LOAD_TASKS,
+    SELECT_TASK,
+    CLEAR_TASK
 } from './constants';
 
 export const updateTask = payload => {
     return { type: UPDATE_TASK, payload };
+};
+
+export const selectTask = payload => {
+    return { type: SELECT_TASK, payload };
+};
+
+export const clearTask = payload => {
+    return { type: CLEAR_TASK, payload };
 };
 
 export const loadTasks = payload => {

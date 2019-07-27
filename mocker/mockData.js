@@ -7,7 +7,7 @@ exports.tasks = [
     {
         id: 't2',
         name: 'Task 2',
-        currentState: 'InDevelopment'
+        currentState: 'In Development'
     },
     {
         id: 't3',
@@ -19,7 +19,7 @@ exports.tasks = [
 exports.config = {
     states: {
         Todo: 'Todo',
-        InDevelopment: 'InDevelopment',
+        InDevelopment: 'In Development',
         QA: 'QA',
         Done: 'Done'
     },
@@ -37,12 +37,12 @@ exports.config = {
             transitions: [
                 {
                     action: 'Start',
-                    target: 'InDevelopment'
+                    target: 'In Development'
                 }
             ]
         },
         {
-            name: 'InDevelopment',
+            name: 'In Development',
             transitions: [
                 { action: 'Finish', target: 'QA' },
                 { action: 'Cancel', target: 'Todo' }

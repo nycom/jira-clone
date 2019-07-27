@@ -48,6 +48,7 @@
         "react-hot-loader": "^4.8.0",
         "react-redux": "^6.0.1",
         "redux": "^4.0.1",
-        "redux-thunk": "^2.3.0"
+        "redux-thunk": "^2.3.0",
+        "lodash": "latest"
     }
 }
