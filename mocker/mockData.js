@@ -64,7 +64,7 @@ exports.config = {
             transitions: [
                 {
                     action: 'Reject',
-                    target: 'InDevelopment'
+                    target: 'In Development'
                 },
                 { action: 'Accept', target: 'Done' }
             ]
