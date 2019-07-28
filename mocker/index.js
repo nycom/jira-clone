@@ -1,7 +1,7 @@
 // const { login } = require('./user');
 const delay = require('mocker-api/utils/delay');
 
-const noProxy = process.env.NO_PROXY === 'true';
+// const noProxy = process.env.NO_PROXY === 'true';
 
 const { tasks, config } = require('./mockData');
 
@@ -13,4 +13,4 @@ const proxy = {
         });
     }
 };
-module.exports = delay(proxy, 100);
+module.exports = delay(proxy, 2000);

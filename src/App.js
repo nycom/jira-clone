@@ -6,7 +6,6 @@ import './app.scss';
 const App = () => {
     return (
         <div className="full-screen">
-            <div className="app-header">Finite State Machine - Jira Clone</div>
             <Sprint />
         </div>
     );

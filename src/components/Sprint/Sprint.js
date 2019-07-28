@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { invert } from 'lodash';
+import { Dimmer, Loader } from 'semantic-ui-react';
 import './sprint.scss';
 import StateMachine from '../../FiniteStateMachine/FiniteStateMachine';
 import StateCol from '../StateCol/StateCol';
@@ -62,25 +63,35 @@ class Sprint extends React.Component {
             : null;
 
         return loading ? (
-            <h1>Loading Jira Configuration</h1>
+            <Dimmer active>
+                <Loader content="Loading Jira Config" size="huge" />
+            </Dimmer>
         ) : (
-            <div className="sprint-container">
-                {statesArray.map(state => {
-                    return (
-                        <StateCol
-                            FSMtasks={this.filterTasks(state, updatedTasks)}
-                            active={
-                                activeTargets
-                                    ? activeTargets.indexOf(state) !== -1
-                                    : false
-                            }
-                            key={state}
-                            title={state}
-                            handleTaskStateChange={this.handleTaskStateChange}
-                        />
-                    );
-                })}
-            </div>
+            <Fragment>
+                <div className="app-header">
+                    Finite State Machine - Jira Clone
+                </div>
+
+                <div className="sprint-container">
+                    {statesArray.map(state => {
+                        return (
+                            <StateCol
+                                FSMtasks={this.filterTasks(state, updatedTasks)}
+                                active={
+                                    activeTargets
+                                        ? activeTargets.indexOf(state) !== -1
+                                        : false
+                                }
+                                key={state}
+                                title={state}
+                                handleTaskStateChange={
+                                    this.handleTaskStateChange
+                                }
+                            />
+                        );
+                    })}
+                </div>
+            </Fragment>
         );
     }
 }
