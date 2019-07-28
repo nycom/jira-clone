@@ -1,12 +1,12 @@
 import React from 'react';
 import { hot } from 'react-hot-loader/root';
-import './app.scss';
 import Sprint from './components/Sprint/Sprint';
+import './app.scss';
 
 const App = () => {
     return (
         <div className="full-screen">
-            <h1>Finite State Machine - Jira Clone</h1>
+            <div className="app-header">Finite State Machine - Jira Clone</div>
             <Sprint />
         </div>
     );

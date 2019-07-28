@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Card, Dropdown } from 'semantic-ui-react';
 import './Task.scss';
 import { clearTask, selectTask, updateTask } from '../../store/actions';
 
 const Task = props => {
     const { task, dispatch } = props;
 
-    const handleChange = task => e => {
-        task.sm.action(e.target.value);
-        task.baseTask.currentState = task.sm.action(e.target.value);
+    const handleOnChange = (e, data) => {
+        task.sm.action(data.value);
         dispatch(
             updateTask({
                 ...task.baseTask,
@@ -31,6 +31,11 @@ const Task = props => {
     const onDragEnd = () => {
         dispatch(clearTask());
     };
+    const transitionOptions = Object.keys(
+        task.sm.currentState?.transitions
+    ).map(transition => {
+        return { key: transition, value: transition, text: transition };
+    });
 
     return (
         <div
@@ -38,22 +43,22 @@ const Task = props => {
             draggable
             onDragEnd={onDragEnd}
             onDragStart={onDragStart}>
-            <div>{task.baseTask.id}</div>
-            <div>{task.baseTask.name}</div>
-            <div>{task.baseTask.currentState}</div>
-            <select onChange={handleChange(task)}>
-                <option defaultValue key={0}>
-                    please select
-                </option>
-
-                {Object.keys(task.sm.currentState?.transitions).map(action => {
-                    return (
-                        <option key={action} value={action}>
-                            {action}
-                        </option>
-                    );
-                })}
-            </select>
+            <Card>
+                <Card.Content
+                    header={task.baseTask.name}
+                    meta={task.baseTask.id}
+                />
+                <Card.Content description={task.baseTask.description} />
+                <Card.Content extra>
+                    <Dropdown
+                        placeholder="Select Action"
+                        fluid
+                        selection
+                        onChange={handleOnChange}
+                        options={transitionOptions}
+                    />
+                </Card.Content>
+            </Card>
         </div>
     );
 };

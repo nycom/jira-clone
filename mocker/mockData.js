@@ -1,17 +1,28 @@
 exports.tasks = [
     {
-        id: 't1',
-        name: 'Task 1',
-        currentState: 'Todo'
+        id: 'Task 1',
+        name: 'Create Finite State Machine',
+        description:
+            'Create an Finite State Machine library for development usage.',
+        currentState: 'QA'
     },
     {
-        id: 't2',
-        name: 'Task 2',
+        id: 'Task 2',
+        name: 'Create FSM Jira Clone',
+        description:
+            'Create Jira clone which will use our newly created Finite State Machine library.',
         currentState: 'In Development'
     },
     {
-        id: 't3',
-        name: 'Task 3',
+        id: 'Task 3',
+        name: 'Unit Test Finite State Machine Library',
+        description: 'Create Unit Tests for our Finite State Machine library.',
+        currentState: 'Todo'
+    },
+    {
+        id: 'Task 4',
+        name: 'Deploy Application',
+        description: 'Deploy our application to github pages.',
         currentState: 'Todo'
     }
 ];

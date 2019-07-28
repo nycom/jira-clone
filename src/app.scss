@@ -1,12 +1,5 @@
-body {
-    background: lightblue;
-    background-size: 300% 300%;
-    -webkit-animation: Background 25s ease infinite;
-    -moz-animation: Background 25s ease infinite;
-    animation: Background 25s ease infinite;
-}
-
 .full-screen {
+    background-color: steelblue;//#F7F7F7;
     position: fixed;
     top: 0;
     right: 0;
@@ -27,12 +20,12 @@ body {
     text-align: center;
 }
 
-h1 {
+.app-header {
     color: #fff;
+    margin: 35px;
     font-family: 'Open Sans', sans-serif;
     font-weight: 800;
     font-size: 4em;
-    letter-spacing: -2px;
     text-align: center;
     text-shadow: 1px 2px 1px rgba(0, 0, 0, 0.6);
 
@@ -46,39 +39,5 @@ h1 {
         text-align: center;
     }
 }
-//
-//@-webkit-keyframes Background {
-//    0% {
-//        background-position: 0% 50%;
-//    }
-//    50% {
-//        background-position: 100% 50%;
-//    }
-//    100% {
-//        background-position: 0% 50%;
-//    }
-//}
-//
-//@-moz-keyframes Background {
-//    0% {
-//        background-position: 0% 50%;
-//    }
-//    50% {
-//        background-position: 100% 50%;
-//    }
-//    100% {
-//        background-position: 0% 50%;
-//    }
-//}
-//
-//@keyframes Background {
-//    0% {
-//        background-position: 0% 50%;
-//    }
-//    50% {
-//        background-position: 100% 50%;
-//    }
-//    100% {
-//        background-position: 0% 50%;
-//    }
-//}
+
+
