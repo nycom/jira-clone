@@ -1,4 +1,10 @@
 .task {
-  margin: 10px 5px;
-  cursor: move;
+    margin: 10px 5px;
+    cursor: move;
+
+    .ui.card,
+    .ui.cards > .card {
+        width: auto;
+        max-width: 260px;
+    }
 }
